@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Rectangle),[MethodDecl(Instance,Id(hi),[],Block([If(Id(k),Block([]),If(Id(x),Block([]),If(Id(a),Block([]),Block([]))))]))])])
+Program([ClassDecl(Id(Rectangle),[])])
