@@ -1,0 +1,21 @@
+Class Rectangle {
+            
+            hi()
+            {
+                If(k)
+                {
+
+                }
+                Elseif(x)
+                {
+
+                }
+                Elseif(a)
+                {
+
+                }Else
+                {
+
+                }
+            }
+        }
