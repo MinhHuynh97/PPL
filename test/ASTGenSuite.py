@@ -138,6 +138,122 @@ class ASTGenSuite(unittest.TestCase):
         }"""
         expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),ArrayType(IntLit(2),ArrayType(IntLit(3),IntType)),None))])])"
         self.assertTrue(TestAST.test(input,expect,320))
+    def test_22(self): 
+        input = """Class Shape {
+            Val $a:Array[Array[Array[Float,10],3],2] ;
+        }"""
+        expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),ArrayType(IntLit(2),ArrayType(IntLit(3),ArrayType(IntLit(10),FloatType))),None))])])"
+        self.assertTrue(TestAST.test(input,expect,321))
+    def test_23(self): 
+        input = """Class Shape {
+            Val $a:Int ;
+            Var b,c:Float=3.2,1.e2;
+            Var myCar:Int=0;
+        }"""
+        expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),IntType,None)),AttributeDecl(Instance,VarDecl(Id(b),FloatType,FloatLit(3.2))),AttributeDecl(Instance,VarDecl(Id(c),FloatType,FloatLit(100.0))),AttributeDecl(Instance,VarDecl(Id(myCar),IntType,IntLit(0)))])])"
+        self.assertTrue(TestAST.test(input,expect,322))
+    def test_24(self): 
+        input = """Class Shape {
+             ##Decl immutable##
+            Val $a:Int ;
+            ##Decl mutable##
+            Var b,c:Float;
+            
+        }"""
+        expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),IntType,None)),AttributeDecl(Instance,VarDecl(Id(b),FloatType)),AttributeDecl(Instance,VarDecl(Id(c),FloatType))])])"
+        self.assertTrue(TestAST.test(input,expect,323))
+    def test_25(self): 
+        input = """Class Shape {       
+            Val $a:Int ;
+            Var b,c:Float;
+            
+        }
+        Class Circle:Shape{
+            Val $m:Int ;
+        }
+        
+        """
+        expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),IntType,None)),AttributeDecl(Instance,VarDecl(Id(b),FloatType)),AttributeDecl(Instance,VarDecl(Id(c),FloatType))]),ClassDecl(Id(Circle),Id(Shape),[AttributeDecl(Static,ConstDecl(Id($m),IntType,None))])])"
+        self.assertTrue(TestAST.test(input,expect,324))
+    def test_26(self): 
+        input = """Class Shape {       
+            Val $a:Int ;
+            Var b,c:Float;
+            Hi(say:String)
+            {
+                Return Out.printString("Shape is ...");
+            }
+        }
+        
+        
+        """
+        expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),IntType,None)),AttributeDecl(Instance,VarDecl(Id(b),FloatType)),AttributeDecl(Instance,VarDecl(Id(c),FloatType)),MethodDecl(Instance,Id(Hi),[param(Id(say),StringType)],Block([Return(CallExpr(Id(Out),Id(printString),[StringLit(Shape is ...)]))]))])])"
+        self.assertTrue(TestAST.test(input,expect,325))
+    def test_27(self): 
+        input = """Class Shape {       
+            Val $a:Int ;
+            Var b,c:Float;
+            
+        }
+        CLass Rectangle: Shape {
+            getArea() {
+        Return Self.length * Self.width; }
+        }
+        
+        
+        """
+        expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),IntType,None)),AttributeDecl(Instance,VarDecl(Id(b),FloatType)),AttributeDecl(Instance,VarDecl(Id(c),FloatType))])])"
+        self.assertTrue(TestAST.test(input,expect,326))
+    def test_28(self): 
+        input = """Class Program {
+            main() {
+            Out.printInt(Shape::$numOfShape); }
+            }
+        
+        
+        """
+        expect = "Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([CallExpr(Id(Out),Id(printInt),[FieldAccess(Id(Shape),Id(Shape))])]))])])"
+        self.assertTrue(TestAST.test(input,expect,327))
+    def test_29(self): 
+        input = """Class Program {
+            main() {
+            If(a>b)
+                {
+                    a=1;
+                }
+            Else
+            {
+                a=3;
+            }
+            }
+            }
+        
+        
+        """
+        expect = "Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([If(BinaryOp(>,Id(a),Id(b)),Block([AssignStmt(Id(a),IntLit(1))]),Block([AssignStmt(Id(a),IntLit(3))]))]))])])"
+        self.assertTrue(TestAST.test(input,expect,328))
+    def test_30(self): 
+        input = """Class Program {
+            main() {
+            If(a>b)
+                {
+                    a=1;
+                }
+            Elseif(a<b)
+            {
+                a=3;
+            }
+            Else
+            {
+                a=4;
+            }
+            }
+            }
+        
+        
+        """
+        expect = "Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([If(BinaryOp(>,Id(a),Id(b)),Block([AssignStmt(Id(a),IntLit(1))]),If(BinaryOp(<,Id(a),Id(b)),Block([AssignStmt(Id(a),IntLit(3))]),Block([AssignStmt(Id(a),IntLit(4))])))]))])])"
+        self.assertTrue(TestAST.test(input,expect,329))
     
 
     

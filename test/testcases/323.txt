@@ -1,0 +1,7 @@
+Class Shape {
+             ##Decl immutable##
+            Val $a:Int ;
+            ##Decl mutable##
+            Var b,c:Float;
+            
+        }
