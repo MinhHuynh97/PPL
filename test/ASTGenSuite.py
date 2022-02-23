@@ -132,6 +132,12 @@ class ASTGenSuite(unittest.TestCase):
         }"""
         expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),ArrayType(IntLit(2),BoolType),[BooleanLit(True),BooleanLit(False)]))])])"
         self.assertTrue(TestAST.test(input,expect,319))
+    def test_21(self): 
+        input = """Class Shape {
+            Val $a:Array[Array[Int,3],2] ;
+        }"""
+        expect = "Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),ArrayType(IntLit(2),ArrayType(IntLit(3),IntType)),None))])])"
+        self.assertTrue(TestAST.test(input,expect,320))
     
 
     
