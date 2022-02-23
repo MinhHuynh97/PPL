@@ -1,0 +1,5 @@
+Class Shape {
+            Val $a:Int ;
+            Var b,c:Float=3.2,1.e2;
+            Var myCar:Int=0;
+        }

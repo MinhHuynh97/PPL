@@ -1,0 +1,12 @@
+Class Shape {       
+            Val $a:Int ;
+            Var b,c:Float;
+            
+        }
+        CLass Rectangle: Shape {
+            getArea() {
+        Return Self.length * Self.width; }
+        }
+        
+        
+        

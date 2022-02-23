@@ -195,6 +195,9 @@ class ASTGeneration(D96Visitor):
             return self.visit(ctx.return_stmt())
         elif ctx.block_stm():
             return self.visit(ctx.block_stm())
+        elif ctx.member_access():
+            return self.visit(ctx.member_access())
+
     def visitStatements(self, ctx: D96Parser.StatementsContext):
         if ctx.getChildCount()==1:
             return [self.visit(ctx.statement())]
@@ -289,7 +292,7 @@ class ASTGeneration(D96Visitor):
         if ctx.getChildCount()==1:
             return self.visit(ctx.expr10())
         obj=Id(ctx.ID().getText())
-        fieldname=Id(ctx.ID().Dollar_id())
+        fieldname=Id(ctx.ID().getText())
         if ctx.getChildCount()==3:
             return FieldAccess(obj,fieldname)
         else:
@@ -315,6 +318,11 @@ class ASTGeneration(D96Visitor):
         else:
             return self.visit(ctx.operand())
             
+    def visitMember_access(self, ctx: D96Parser.Member_accessContext):
+        if ctx.expr8():
+            return self.visit(ctx.expr8())
+        return self.visit(ctx.expr9())
+
     def visitOperand(self, ctx: D96Parser.OperandContext):
         if ctx.literal():
             return self.visit(ctx.literal())

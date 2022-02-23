@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),IntType,None)),AttributeDecl(Instance,VarDecl(Id(b),FloatType,FloatLit(3.2))),AttributeDecl(Instance,VarDecl(Id(c),FloatType,FloatLit(100.0))),AttributeDecl(Instance,VarDecl(Id(myCar),IntType,IntLit(0)))])])

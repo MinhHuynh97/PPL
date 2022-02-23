@@ -1,0 +1,10 @@
+Class Shape {       
+            Val $a:Int ;
+            Var b,c:Float;
+            
+        }
+        Class Circle:Shape{
+            Val $m:Int ;
+        }
+        
+        

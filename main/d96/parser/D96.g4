@@ -51,7 +51,7 @@ destructor:DESTRUCTOR LP  RP block_stm;
 
 block_stm:LCB  (statements|) RCB ;
 
-statement: variable_decl|assignment_statement| if_statement|foreach_stmt|break_stmt|cont_stmt|call_stmt |return_stmt|block_stm;
+statement: variable_decl|assignment_statement| if_statement|foreach_stmt|break_stmt|cont_stmt|call_stmt |return_stmt|block_stm|member_access;
 
 statements: statement statements|statement;
 
@@ -109,6 +109,9 @@ IN:'In';
 CONSTRUCTOR:'Constructor';		
 DESTRUCTOR:'Destructor';
 SELF : 'Self' ;
+
+
+member_access:expr8 SEMI| expr9 SEMI;
 
 //ASSIGNMENT STATEMENT
 
