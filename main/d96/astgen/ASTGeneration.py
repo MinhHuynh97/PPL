@@ -49,19 +49,25 @@ class ASTGeneration(D96Visitor):
     def visitVariable_decl(self, ctx: D96Parser.Variable_declContext):
         variables=self.visit(ctx.list_name())
         varType=self.visit(ctx.typ_var())
+        
         if ctx.list_exp():
             varInit=self.visit(ctx.list_exp())
             
             return list(map(lambda x,y:VarDecl(Id(x),varType,y),variables,varInit ))
+        if type(varType) is ClassType:
+            return list(map(lambda a:VarDecl(Id(a),varType,NullLiteral()),variables))
         return list(map(lambda x:VarDecl(Id(x),varType,None),variables))
         
     def visitConst_decl(self, ctx: D96Parser.Const_declContext):
         variables=self.visit(ctx.list_name())
         varType=self.visit(ctx.typ_var())
+        
         if ctx.list_exp():
             varInit=self.visit(ctx.list_exp())
             
             return list(map(lambda a,b:ConstDecl(Id(a),varType,b),variables,varInit ))
+        if type(varType) is ClassType:
+            return list(map(lambda a:ConstDecl(Id(a),varType,NullLiteral()),variables))
         return list(map(lambda a:ConstDecl(Id(a),varType,None),variables))
 
     def visitAttribute_decl(self, ctx: D96Parser.Attribute_declContext): 
@@ -297,7 +303,7 @@ class ASTGeneration(D96Visitor):
         if ctx.getChildCount()==1:
             return self.visit(ctx.expr11())
         classname=Id(ctx.ID().getText())
-        print(classname)
+        
         if ctx.list_exp():
             param=self.visit(ctx.list_exp())
             return NewExpr(classname,param)
@@ -352,7 +358,7 @@ class ASTGeneration(D96Visitor):
         if ctx.elseStmt():
             expr=self.visit(ctx.elif_stm())
             elseStm=self.visit(ctx.elseStmt())
-            print(elseStm)
+            
             return If(expr[0],expr[1],elseStm)
         elif ctx.else_stm():
             return self.visit(ctx.else_stm())
@@ -371,7 +377,7 @@ class ASTGeneration(D96Visitor):
     #     return expr,stm
 
     def visitElse_stm(self, ctx: D96Parser.Else_stmContext):
-        print(self.visit(ctx.block_stm()))
+        
         return self.visit(ctx.block_stm())
         
         
@@ -408,9 +414,10 @@ class ASTGeneration(D96Visitor):
             return StringType()
         elif ctx.array():
             return self.visit(ctx.array())
-        elif ctx.ID():
-            return ClassType(ctx.ID().getText())
-
+        elif ctx.class_type():
+            return ClassType(self.visit(ctx.class_type()))
+    def visitClass_type(self, ctx: D96Parser.Class_typeContext):
+        return ctx.ID().getText()
     def visitArray(self, ctx: D96Parser.ArrayContext):
         eleType=self.visit(ctx.typ_var())
         size=IntLiteral(int(ctx.INTLIT().getText()))

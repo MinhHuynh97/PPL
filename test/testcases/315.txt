@@ -1,0 +1,3 @@
+Class Shape {
+            Var $a,b,c:Boolean=True,False,True-False*False +True ;
+        }

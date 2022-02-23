@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Shape),[AttributeDecl(Static,ConstDecl(Id($a),BoolType,BinaryOp(+,BooleanLit(True),BooleanLit(False))))])])

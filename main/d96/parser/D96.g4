@@ -145,8 +145,8 @@ call_stmt: func_call SEMI;
 return_stmt: RETURN (expr| ) SEMI;
 
 //TYPE
-typ_var: INT| FLOAT|BOOLEAN|STRING|array|ID;
-
+typ_var: INT| FLOAT|BOOLEAN|STRING|array|class_type;
+class_type:ID;
 array: ARRAY LSB typ_var COMMA INTLIT RSB;
 
 //Skip

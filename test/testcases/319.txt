@@ -1,0 +1,3 @@
+Class Shape {
+            Val $a:Array[Boolean,2]=Array(True,False) ;
+        }
