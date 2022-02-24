@@ -180,34 +180,37 @@ class ASTGeneration(D96Visitor):
         
     def visitStatement(self, ctx: D96Parser.StatementContext):
         if ctx.variable_decl():
-            return self.visit(ctx.variable_decl())
+            res=[]
+            for x in self.visit(ctx.variable_decl()):
+                res+=[x]
+            return res
         elif ctx.foreach_stmt():
-            return self.visit(ctx.foreach_stmt())
+            return [self.visit(ctx.foreach_stmt())]
         elif ctx.assignment_statement():
-            return self.visit(ctx.assignment_statement())  
+            return [self.visit(ctx.assignment_statement())]  
         elif ctx.if_statement():
-            return self.visit(ctx.if_statement())
+            return [self.visit(ctx.if_statement())]
         elif ctx.break_stmt():
-            return self.visit(ctx.break_stmt())
+            return [self.visit(ctx.break_stmt())]
         elif ctx.cont_stmt():
-            return self.visit(ctx.cont_stmt())   
+            return [self.visit(ctx.cont_stmt())]
         elif ctx.return_stmt():
-            return self.visit(ctx.return_stmt())
+            return [self.visit(ctx.return_stmt())]
         elif ctx.block_stm():
-            return self.visit(ctx.block_stm())
+            return [self.visit(ctx.block_stm())]
         elif ctx.member_access():
-            return self.visit(ctx.member_access())
+            return [self.visit(ctx.member_access())]
 
     def visitStatements(self, ctx: D96Parser.StatementsContext):
         if ctx.getChildCount()==1:
-            return [self.visit(ctx.statement())]
-        return [self.visit(ctx.statement())]+self.visit(ctx.statements())
+            return self.visit(ctx.statement())
+        return self.visit(ctx.statement())+self.visit(ctx.statements())
     def visitIndex_operators(self, ctx: D96Parser.Index_operatorsContext):
         if ctx.index_operators():
-            return self.visit(ctx.expr())+self.visit(ctx.index_operators())
+            return [self.visit(ctx.expr())]+self.visit(ctx.index_operators())
         else:
 
-            return self.visit(ctx.expr())
+            return [self.visit(ctx.expr())]
 
     def visitFunc_call(self, ctx: D96Parser.Func_callContext): pass
 
@@ -331,6 +334,7 @@ class ASTGeneration(D96Visitor):
         elif ctx.NULL():
             return NullLiteral()
         elif ctx.SELF():
+            
             return SelfLiteral()
     def visitLiteral(self, ctx: D96Parser.LiteralContext):
         if ctx.INTLIT():
@@ -396,8 +400,8 @@ class ASTGeneration(D96Visitor):
         loop=self.visit(ctx.block_stm())
         if ctx.INTLIT(2):
             expr3=IntLiteral(int(ctx.INTLIT(2).getText()))
-            return For(name,expr1,expr2,expr3,loop)
-        return For(name,expr1,expr2,None,loop)
+            return For(name,expr1,expr2,loop,expr3)
+        return For(name,expr1,expr2,loop,None)
     def visitBreak_stmt(self, ctx: D96Parser.Break_stmtContext):
         return Break()
 

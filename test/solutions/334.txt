@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([For(Id(x),IntLit(5),IntLit(2),Block([CallExpr(Id(Out),Id(printInt),[ArrayCell(Id(arr),[ArrayCell(Id(y),[IntLit(1)]),Id(x)])])])])]))])])

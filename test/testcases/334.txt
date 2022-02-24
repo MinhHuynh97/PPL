@@ -1,0 +1,5 @@
+Class Program {
+            main() {
+            Foreach (x In 5 .. 2) { Out.printInt(arr[y[1]][x]);
+        } }
+        }

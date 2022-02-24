@@ -195,7 +195,7 @@ class If(Stmt):
 
 @dataclass
 class For(Stmt):
-    id: Id
+    id : Id
     expr1: Expr
     expr2: Expr 
     loop: Stmt
