@@ -7,4 +7,3 @@ Class Shape {
             Val $m:Int ;
         }
         
-        

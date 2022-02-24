@@ -1,0 +1,7 @@
+Class Program {
+            main() {
+                Var r, s: Int;
+                r= 2.0;
+                }
+            }
+        
