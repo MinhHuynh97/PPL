@@ -1,0 +1,14 @@
+Class Program {
+            main() {
+                Foreach (i In 1 .. 100 By 2) { 
+                    If(i>20)
+                    {
+                        Out.printInt(i);
+                    }
+                    Else{
+                        Out.printInt(i*i);
+                    }
+                }
+            }
+            }
+        

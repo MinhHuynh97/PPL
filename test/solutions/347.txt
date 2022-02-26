@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([VarDecl(Id(a),IntType),VarDecl(Id(s),IntType),AssignStmt(Id(a),CallExpr(Id(Car),Id(Type),[FieldAccess(Self(),Id(Brand))])),AssignStmt(Id(s),BinaryOp(+,ArrayCell(Id(m),[IntLit(0)]),Id(a)))]))])])

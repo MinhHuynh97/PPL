@@ -1,0 +1,11 @@
+Class Program {
+            main() {
+                Var a: Array[String, 15]; 
+                If(a[1]=="as")
+                {
+                    Return "As";
+                }
+                
+            }
+            }
+        

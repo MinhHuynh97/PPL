@@ -1,0 +1,9 @@
+Class Program {
+            main() {
+                    
+                a= Car::$Type(Type.Brand,Name::$Pre());
+                    
+                
+            }
+            }
+        
