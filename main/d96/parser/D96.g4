@@ -110,8 +110,9 @@ CONSTRUCTOR:'Constructor';
 DESTRUCTOR:'Destructor';
 SELF : 'Self' ;
 
-
-member_access:expr8 SEMI| expr9 SEMI;
+instance_method:expr DOT ID LP (list_exp|) RP;
+static_method:ID ACCESS Dollar_id LP (list_exp|) RP;
+member_access:instance_method SEMI| static_method SEMI;
 
 //ASSIGNMENT STATEMENT
 

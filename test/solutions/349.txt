@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([VarDecl(Id(a),ArrayType(IntLit(15),StringType)),If(BinaryOp(==,ArrayCell(Id(a),[IntLit(1)]),StringLit(as)),Block([Return(StringLit(As))]))]))])])

@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([AssignStmt(Id(a),CallExpr(Id(Car),Id(Car),[FieldAccess(Id(Type),Id(Brand))]))]))])])

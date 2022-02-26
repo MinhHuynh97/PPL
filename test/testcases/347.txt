@@ -1,0 +1,9 @@
+Class Program {
+            main() {
+                Var a, s: Int;   
+                a= Car.Type(Self.Brand);
+                s=m[0]+a;
+                
+            }
+            }
+        

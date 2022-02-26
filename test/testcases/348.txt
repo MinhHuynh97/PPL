@@ -1,0 +1,9 @@
+Class Program {
+            main() {
+                Var a: Array[Float, 15]; 
+                s = 12 * Self.He; 
+                a[10] = s;
+                
+            }
+            }
+        

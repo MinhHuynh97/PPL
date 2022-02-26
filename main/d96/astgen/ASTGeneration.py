@@ -289,8 +289,6 @@ class ASTGeneration(D96Visitor):
             else:
                 return CallExpr(obj,fieldname,[])
 
-
-
     def visitExpr9(self, ctx: D96Parser.Expr9Context):
         if ctx.getChildCount()==1:
             return self.visit(ctx.expr10())
@@ -320,11 +318,25 @@ class ASTGeneration(D96Visitor):
             return self.visit(ctx.expr())
         else:
             return self.visit(ctx.operand())
-            
+    def visitInstance_method(self, ctx: D96Parser.Instance_methodContext):
+        obj=self.visit(ctx.expr())
+        fieldname=Id(ctx.ID().getText())
+        if ctx.list_exp():
+            param=self.visit(ctx.list_exp())
+            return CallExpr(obj,fieldname,param)
+        return CallExpr(obj,fieldname,[])
+    def visitStatic_method(self, ctx: D96Parser.Static_methodContext):
+        obj=Id(ctx.ID().getText())
+        fieldname=Id(ctx.Dollar_id().getText())
+        if ctx.list_exp():
+            param=self.visit(ctx.list_exp())
+            return CallExpr(obj,fieldname,param)
+        return CallExpr(obj,fieldname,[])
+
     def visitMember_access(self, ctx: D96Parser.Member_accessContext):
-        if ctx.expr8():
-            return self.visit(ctx.expr8())
-        return self.visit(ctx.expr9())
+        if ctx.instance_method():
+            return self.visit(ctx.instance_method())
+        return self.visit(ctx.static_method())
 
     def visitOperand(self, ctx: D96Parser.OperandContext):
         if ctx.literal():
