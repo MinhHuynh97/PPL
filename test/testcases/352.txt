@@ -1,0 +1,6 @@
+Class Program {
+            main() {           
+            a=Array(1, 5, 7, 12);
+            }
+            }
+        
