@@ -1,1 +1,1 @@
-Undeclared Function: foo
+Program([ClassDecl(Id(Rectangle),Id(Shape),[MethodDecl(Instance,Id(Print),[param(Id(C),StringType)],Block([Return(BinaryOp(+.,StringLit(C is :),Id(C)))]))])])

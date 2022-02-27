@@ -1,0 +1,25 @@
+Class Program {
+                
+                Name(A:String)
+                {
+                    Return A;
+                }
+                Var a:Int=0;
+                }
+                Class Main:Program{
+                    Val c:String=X.a+b/10;
+                }
+                Class Hide:Main{
+                    Var a:Program;
+                    Var c:String;
+                    
+                    Method()
+                    {
+                        c=a.Name();
+                        If(c=="123")
+                        {
+                            Return "Success";
+                        }
+                    }
+                }
+            

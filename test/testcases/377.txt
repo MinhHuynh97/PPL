@@ -1,0 +1,18 @@
+Class Program {
+                $Method(A:Int;C:Float)
+                {
+                    
+                    Foreach (i In 1 .. 100 By 2) { 
+                            If(A>C)
+                        {
+                            a=C;
+                            Out.printInt(A);
+                        }Else{
+                            b=A;
+                            Return C;
+                            
+                        }
+                    }           
+                }
+                }
+            

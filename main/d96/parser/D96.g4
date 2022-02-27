@@ -50,17 +50,18 @@ destructor:DESTRUCTOR LP  RP block_stm;
 // variable_decl:typ_name list_name COLON typ_var optionally SEMI ;
 
 block_stm:LCB  (statements|) RCB ;
-
-statement: variable_decl|const_decl|assignment_statement| if_statement|foreach_stmt|break_stmt|cont_stmt|call_stmt |return_stmt|block_stm|member_access;
-
 statements: statement statements|statement;
+
+statement: variable_decl|const_decl|assignment_statement| if_statement|foreach_stmt|break_stmt|cont_stmt |return_stmt|block_stm|member_access;
+
+
 
 //index operators
 
 index_operators : LSB expr RSB index_operators| LSB expr RSB ;
 
 //Method call
-func_call: expr DOT name_att LP (parameter | ) RP;
+// func_call: expr DOT name_att LP (parameter | ) RP;
 
 
 //Expression
@@ -110,7 +111,7 @@ CONSTRUCTOR:'Constructor';
 DESTRUCTOR:'Destructor';
 SELF : 'Self' ;
 
-instance_method:expr DOT ID LP (list_exp|) RP;
+instance_method:expr8 DOT ID LP (list_exp|) RP;
 static_method:ID ACCESS Dollar_id LP (list_exp|) RP;
 member_access:instance_method SEMI| static_method SEMI;
 
@@ -144,7 +145,7 @@ cont_stmt: CONTINUE SEMI;
 
 //Return statement
 
-call_stmt: func_call SEMI;
+// call_stmt: func_call SEMI;
 
 return_stmt: RETURN (expr| ) SEMI;
 

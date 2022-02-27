@@ -1,1 +1,8 @@
-int main() {foo();}
+Class Rectangle: Shape {
+            Print(C:String)
+            {
+                
+                    Return "C is :" +.C;
+                            
+            }
+        }

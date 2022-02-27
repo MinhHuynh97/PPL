@@ -1,3 +1,4 @@
+# Huỳnh Bảo Minh -2020047
 from D96Visitor import D96Visitor
 from D96Parser import D96Parser
 from AST import *
@@ -26,13 +27,6 @@ class ASTGeneration(D96Visitor):
                 return [ClassDecl(classname,self.visit(ctx.class_bodys()),None)]
             return [ClassDecl(classname,[],None)]
             
-        # if ctx.class_bodys():
-        #     memlist=self.visit(ctx.class_bodys())
-        #     if ctx.COLON():
-        #         parentname=self.visit(ctx.ID(1).getText())
-        #         return [ClassDecl(classname,memlist,parentname)] +print("213")
-        #     return [ClassDecl(classname,memlist,None)]+print("21345")
-        # return [ClassDecl(classname,[],None)]+print("21345")
             
     def visitClass_bodys(self, ctx: D96Parser.Class_bodysContext):
         if ctx.getChildCount()==1:
@@ -71,18 +65,6 @@ class ASTGeneration(D96Visitor):
         return list(map(lambda a:ConstDecl(Id(a),varType,None),variables))
 
     def visitAttribute_decl(self, ctx: D96Parser.Attribute_declContext): 
-        # if ctx.variable_decl():
-        #     name=str(self.visit(ctx.variable_decl().variable.getText()))
-        #     if "$" in name:
-        #         return [AttributeDecl(Static(),self.visit(ctx.variable_decl()))]
-        #     else:
-        #         return [AttributeDecl(Instance(),self.visit(ctx.variable_decl()))]
-        # else:
-        #     name=str(self.visit(ctx.const_decl().variable.getText()))
-        #     if "$" in name:
-        #         return [AttributeDecl(Static(),self.visit(ctx.const_decl()))]
-        #     else:
-        #         return [AttributeDecl(Instance(),self.visit(ctx.const_decl()))]
         res=[]
         if ctx.variable_decl():
             for x in self.visit(ctx.variable_decl()):
@@ -120,8 +102,6 @@ class ASTGeneration(D96Visitor):
             return Id(ctx.ID().getText())
         return Id(ctx.Dollar_id().getText())
 
-    # def visitOptionally(self, ctx: D96Parser.OptionallyContext): pass
-
     def visitList_exp(self, ctx: D96Parser.List_expContext):
         if ctx.getChildCount()==1:
             if ctx.expr():
@@ -137,7 +117,8 @@ class ASTGeneration(D96Visitor):
                 return [MethodDecl(name,Instance(),param,body)]
             return [MethodDecl(name,Instance(),[],body)]
         elif ctx.Dollar_id():
-            name=Id(str(ctx.ID().getText()))
+            name=Id(str(ctx.Dollar_id().getText()))
+            body=self.visit(ctx.block_stm())
             if ctx.parameter():
                 param=self.visit(ctx.parameter())
                 return [MethodDecl(name,Static(),param,body)]
@@ -171,15 +152,16 @@ class ASTGeneration(D96Visitor):
     def visitDestructor(self, ctx: D96Parser.DestructorContext):
         return [MethodDecl(ctx.DESTRUCTOR().getText(),Instance(),[],self.visit(ctx.block_stm()))]
 
-    # def visitVariable_decl(self, ctx: D96Parser.Variable_declContext): pass
 
     def visitBlock_stm(self, ctx: D96Parser.Block_stmContext): 
         if ctx.statements():
+            
             stm=self.visit(ctx.statements())
             return Block(stm)
         return Block([])
         
     def visitStatement(self, ctx: D96Parser.StatementContext):
+        
         if ctx.variable_decl():
             res=[]
             for x in self.visit(ctx.variable_decl()):
@@ -193,6 +175,7 @@ class ASTGeneration(D96Visitor):
         elif ctx.foreach_stmt():
             return [self.visit(ctx.foreach_stmt())]
         elif ctx.assignment_statement():
+            
             return [self.visit(ctx.assignment_statement())]  
         elif ctx.if_statement():
             return [self.visit(ctx.if_statement())]
@@ -205,10 +188,12 @@ class ASTGeneration(D96Visitor):
         elif ctx.block_stm():
             return [self.visit(ctx.block_stm())]
         elif ctx.member_access():
+            
             return [self.visit(ctx.member_access())]
 
     def visitStatements(self, ctx: D96Parser.StatementsContext):
         if ctx.getChildCount()==1:
+            
             return self.visit(ctx.statement())
         return self.visit(ctx.statement())+self.visit(ctx.statements())
     def visitIndex_operators(self, ctx: D96Parser.Index_operatorsContext):
@@ -218,7 +203,6 @@ class ASTGeneration(D96Visitor):
 
             return [self.visit(ctx.expr())]
 
-    def visitFunc_call(self, ctx: D96Parser.Func_callContext): pass
 
     def visitExpr(self, ctx: D96Parser.ExprContext):
         if ctx.getChildCount()==1:
@@ -325,12 +309,14 @@ class ASTGeneration(D96Visitor):
         else:
             return self.visit(ctx.operand())
     def visitInstance_method(self, ctx: D96Parser.Instance_methodContext):
-        obj=self.visit(ctx.expr())
+        obj=self.visit(ctx.expr8())
         fieldname=Id(ctx.ID().getText())
+        
         if ctx.list_exp():
             param=self.visit(ctx.list_exp())
             return CallExpr(obj,fieldname,param)
         return CallExpr(obj,fieldname,[])
+
     def visitStatic_method(self, ctx: D96Parser.Static_methodContext):
         obj=Id(ctx.ID().getText())
         fieldname=Id(ctx.Dollar_id().getText())
@@ -377,8 +363,6 @@ class ASTGeneration(D96Visitor):
         if ctx.elseStmt():
             
             elseStm=self.visit(ctx.elseStmt())
-            # for x in elseStm:
-            #     if x.getChildCount():
             
             return If(expr,thenStm,elseStm)
         return If(expr,thenStm,None)
@@ -401,10 +385,6 @@ class ASTGeneration(D96Visitor):
         thenStm=self.visit(ctx.block_stm())
         return expr,thenStm
 
-    # def visitStmt_if(self, ctx: D96Parser.Stmt_ifContext): 
-    #     expr=self.visit(ctx.expr())
-    #     stm=self.visit(ctx.block_stm())
-    #     return expr,stm
 
     def visitElse_stm(self, ctx: D96Parser.Else_stmContext):
         
@@ -426,7 +406,6 @@ class ASTGeneration(D96Visitor):
     def visitCont_stmt(self, ctx: D96Parser.Cont_stmtContext):
         return Continue()
 
-    def visitCall_stmt(self, ctx: D96Parser.Call_stmtContext): pass
 
     def visitReturn_stmt(self, ctx: D96Parser.Return_stmtContext):
         if ctx.expr():

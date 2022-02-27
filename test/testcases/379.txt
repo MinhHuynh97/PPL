@@ -1,0 +1,16 @@
+Class Program {
+                $Method(A:Int;C:Float)
+                {
+                    
+                    Return A+C;       
+                }
+                Name(A:String)
+                {
+                    Return A;
+                }
+                Var a:Int=0;
+                }
+                Class Main:Program{
+                    Val c:String=X.Name();
+                }
+            

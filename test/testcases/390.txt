@@ -1,0 +1,26 @@
+
+                
+                Class Hide:Program{
+                    Var a:M;
+                    Var c:String;
+                    Hi(a:Int;c:String)
+                    {
+                        Self.a=a;
+                        Self.c=c;
+                    }
+                    Get()
+                    {
+                        Return a+c;
+                    }
+                    Sum(a,c,v:Int)
+                    {
+                        If(a==10)
+                        {
+                            Return a+v;
+                        }
+
+                    }
+                    
+                    
+                }
+            

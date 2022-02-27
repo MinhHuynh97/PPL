@@ -1,0 +1,27 @@
+
+                
+                Class Hide:Program{
+                    Var a:M;
+                    Var c:String;
+                    
+                    Method()
+                    {
+                        c=a.c()+Self.name;
+                        If(c=="123")
+                        {
+                            Return "Success";
+                        }
+                        Else
+                        {
+                            Return 123;
+                        }
+                    }
+                    Print()
+                    {
+                        If(x==1)
+                        {
+                            Return Self.Method();
+                        }
+                    }
+                }
+            

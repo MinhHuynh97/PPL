@@ -1,0 +1,22 @@
+
+                Class Main:Program{
+                    Val c:String=X.a+b/10;
+                }
+                Class Hide:Program{
+                    Var a:Program;
+                    Var c:String;
+                    
+                    Method()
+                    {
+                        c=a.c()+Self.name;
+                        If(c=="123")
+                        {
+                            Return "Success";
+                        }
+                        Else
+                        {
+                            Return 123;
+                        }
+                    }
+                }
+            

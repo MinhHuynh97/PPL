@@ -1,0 +1,11 @@
+Class Shape {       
+            Val $a:Int ;
+            Var b,c:Float;
+            Hi(say:String)
+            {
+                Return Out.printString("Shape is ...");
+            }
+        }
+        
+        
+        
