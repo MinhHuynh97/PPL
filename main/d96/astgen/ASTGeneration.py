@@ -91,6 +91,7 @@ class ASTGeneration(D96Visitor):
                     res+= [AttributeDecl(Static(),x)]
                 else:
                     res+= [AttributeDecl(Instance(),x)]
+            
             return res
         else:
             for x in self.visit(ctx.const_decl()):
@@ -182,6 +183,11 @@ class ASTGeneration(D96Visitor):
         if ctx.variable_decl():
             res=[]
             for x in self.visit(ctx.variable_decl()):
+                res+=[x]
+            return res
+        if ctx.const_decl():
+            res=[]
+            for x in self.visit(ctx.const_decl()):
                 res+=[x]
             return res
         elif ctx.foreach_stmt():
