@@ -4,9 +4,13 @@ Class Program {
                 {
                     a=1;
                 }
-            Else
+            Elseif(a<b)
             {
                 a=3;
+            }
+            Else
+            {
+                a=4;
             }
             }
             }

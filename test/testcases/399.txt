@@ -1,4 +1,8 @@
 Class Rectangle: Shape {
-            None() {
-        Return Null;}
+            Print(C:String)
+            {
+                
+                    Return "C is :" +.C;
+                            
+            }
         }

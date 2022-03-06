@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([Block([CallExpr(Id(indextider),Id(Indetider),[])])]))])])
+Program([ClassDecl(Id(Program),[MethodDecl(Id(main),Static,[],Block([Block([Call(Id(indextider),Id(Indetider),[])])]))])])

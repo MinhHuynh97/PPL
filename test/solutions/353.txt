@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([AssignStmt(Id(a),[StringLit(Kangxi),StringLit(Yongzheng),StringLit(Qianlong)])]))])])
+Program([ClassDecl(Id(Program),[MethodDecl(Id(main),Static,[],Block([AssignStmt(Id(a),[StringLit(Kangxi),StringLit(Yongzheng),StringLit(Qianlong)])]))])])

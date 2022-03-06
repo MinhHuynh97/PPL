@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([If(Id(x),Block([CallExpr(Id(Shape),Id($getNumOfShape),[])]))]))])])
+Program([ClassDecl(Id(Program),[MethodDecl(Id(main),Static,[],Block([If(Id(x),Block([Call(Id(Shape),Id($getNumOfShape),[])]))]))])])

@@ -1,3 +1,7 @@
-Class Rectangle {
+Class myCla46 {
+                myMetd46() {
+                    Val x:Int=1;
+                }
             
         }
+        

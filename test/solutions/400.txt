@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Rectangle),Id(Shape),[MethodDecl(Instance,Id(Print),[param(Id(C),StringType)],Block([Return(BinaryOp(+.,StringLit(C is :),Id(C)))]))])])
+Program([ClassDecl(Id(Rectangle),Id(Shape),[MethodDecl(Id(Print),Instance,[param(Id(C),StringType)],Block([Return(BinaryOp(+.,StringLit(C is :),Id(C)))]))])])

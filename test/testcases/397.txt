@@ -1,19 +1,4 @@
-Class Program {
-            main() {
-            If(a>b)
-                {
-                    a=1;
-                }
-            Elseif(a<b)
-            {
-                a=3;
-            }
-            Else
-            {
-                a=4;
-            }
-            }
-            }
-        
-        
-        
+Class Rectangle: Shape {
+            getArea() {
+        Return Self.length * Self.width; }
+        }

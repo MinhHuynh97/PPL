@@ -1,6 +1,14 @@
 Class Program {
             main() {
-            Out.printInt(Shape::$numOfShape); }
+            If(a>b)
+                {
+                    a=1;
+                }
+            Else
+            {
+                a=3;
+            }
+            }
             }
         
         
