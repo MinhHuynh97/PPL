@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([If(UnaryOp(!,Id(a)),Block([]))]))])])
+Program([ClassDecl(Id(Program),[MethodDecl(Id(main),Static,[],Block([If(UnaryOp(!,Id(a)),Block([]))]))])])

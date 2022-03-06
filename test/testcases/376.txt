@@ -1,0 +1,12 @@
+Class Program {
+                $Method(A:Int;C:Float)
+                {
+                    If(A>C)
+                    {
+                        Out.printInt(A);
+                    }Else{
+                        Return C;
+                    }
+                }
+                }
+            

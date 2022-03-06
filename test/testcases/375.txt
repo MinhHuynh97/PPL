@@ -1,0 +1,7 @@
+Class Program {
+                $Method(A:Int;C:Float)
+                {
+                    Return A+C;
+                }
+                }
+            

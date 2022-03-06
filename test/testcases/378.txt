@@ -1,0 +1,13 @@
+Class Program {
+                $Method(A:Int;C:Float)
+                {
+                    
+                    Return A+C;       
+                }
+                Name(A:String)
+                {
+                    Return A;
+                }
+                Var a:Int=0;
+                }
+            

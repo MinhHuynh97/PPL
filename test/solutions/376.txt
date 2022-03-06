@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Id($Method),Static,[param(Id(A),IntType),param(Id(C),FloatType)],Block([If(BinaryOp(>,Id(A),Id(C)),Block([Call(Id(Out),Id(printInt),[Id(A)])]),Block([Return(Id(C))]))]))])])

@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([Return(FieldAccess(Id(Car),Id(Car)))]))])])
+Program([ClassDecl(Id(Program),[MethodDecl(Id(main),Static,[],Block([Return(FieldAccess(Id(Car),Id($Type)))]))])])

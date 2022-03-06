@@ -1,1 +1,1 @@
-Program([ClassDecl(Id(Program),[MethodDecl(Instance,Id(main),[],Block([VarDecl(Id(a),ArrayType(IntLit(15),FloatType)),AssignStmt(Id(s),BinaryOp(*,IntLit(12),FieldAccess(Self(),Id(He)))),AssignStmt(ArrayCell(Id(a),[IntLit(10)]),Id(s))]))])])
+Program([ClassDecl(Id(Program),[MethodDecl(Id(main),Static,[],Block([VarDecl(Id(a),ArrayType(15,FloatType)),AssignStmt(Id(s),BinaryOp(*,IntLit(12),FieldAccess(Self(),Id(He)))),AssignStmt(ArrayCell(Id(a),[IntLit(10)]),Id(s))]))])])

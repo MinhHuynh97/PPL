@@ -1,0 +1,12 @@
+Class Program {
+                
+                Name(A:String)
+                {
+                    Return A;
+                }
+                Var a:Int=0;
+                }
+                Class Main:Program{
+                    Val c:String=X.a+b/10;
+                }
+            

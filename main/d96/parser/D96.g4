@@ -12,18 +12,29 @@ options {
 
 program: decls EOF ;
 
-decls: class_decl decls|class_decl;
-class_decl:CLASS (ID | ID COLON ID) LCB (class_bodys|) RCB;
+
+
+decls: classNormal decls|classNormal;
+
+
+
+classNormal:CLASS (ID | ID COLON ID) LCB (class_bodys|) RCB;
 class_bodys:class_body class_bodys|class_body;
+
 class_body:attribute_decl|method_decl;
+// classProgram:CLASS (PROGRAM|PROGRAM COLON ID) LCB (class_bodySpecails|) RCB;
 
+// class_bodySpecails:class_bodySpecial class_bodySpecails|class_bodySpecial;
 
+// class_bodySpecial:normalMain|specialMain|attribute_decl|method_decl;
+// specialMain:MAIN LP RP block_stm;
+// normalMain:MAIN LP parameter RP block_stm;
 variable_decl:VAR list_name COLON typ_var (SET list_exp|) SEMI;
 
 const_decl:VAL list_name COLON typ_var (SET list_exp|) SEMI;
 //Attribute declaration
 
-typ_name :VAL | VAR;
+// typ_name :VAL | VAR;
 
 attribute_decl: variable_decl|const_decl ;
 
@@ -42,6 +53,8 @@ parameter: identifer_list COLON typ_var SEMI parameter|identifer_list COLON typ_
 
 identifer_list: name_att COMMA identifer_list| name_att;
 
+normal:;
+
 constructor:CONSTRUCTOR LP (parameter|) RP block_stm;
 
 destructor:DESTRUCTOR LP  RP block_stm;
@@ -50,17 +63,24 @@ destructor:DESTRUCTOR LP  RP block_stm;
 // variable_decl:typ_name list_name COLON typ_var optionally SEMI ;
 
 block_stm:LCB  (statements|) RCB ;
-
-statement: variable_decl|const_decl|assignment_statement| if_statement|foreach_stmt|break_stmt|cont_stmt|call_stmt |return_stmt|block_stm|member_access;
-
 statements: statement statements|statement;
+
+statement: variable_declmethod|const_declmethod|assignment_statement| if_statement|foreach_stmt|break_stmt|cont_stmt |return_stmt|block_stm|member_access;
+variable_declmethod:VAR list_namemethod COLON typ_var (SET list_exp|) SEMI;
+
+const_declmethod:VAL list_namemethod COLON typ_var (SET list_exp|) SEMI;
+list_namemethod:ID  COMMA  list_namemethod| ID;
+
+instance_method:expr DOT ID LP (list_exp|) RP;
+static_method:ID ACCESS Dollar_id LP (list_exp|) RP;
+member_access:instance_method SEMI| static_method SEMI;
 
 //index operators
 
 index_operators : LSB expr RSB index_operators| LSB expr RSB ;
 
 //Method call
-func_call: expr DOT name_att LP (parameter | ) RP;
+// func_call: expr DOT name_att LP (parameter | ) RP;
 
 
 //Expression
@@ -77,7 +97,9 @@ expr9: ID ACCESS Dollar_id|ID ACCESS Dollar_id LP (list_exp|) RP|expr10;
 expr10: NEW ID LP (list_exp|) RP |expr11;
 expr11: LP expr RP |operand ;
 operand:SELF| NULL| name_att | literal;
-literal:INTLIT|FLOATLIT|boolit|STRINGLIT|arraylit;
+literal:intlit|FLOATLIT|boolit|STRINGLIT|arraylit;
+// PROGRAM:'Program';
+// MAIN:'main';
 TRUE:'True';             
 FALSE:'False'; 
 BREAK:'Break';          
@@ -110,9 +132,7 @@ CONSTRUCTOR:'Constructor';
 DESTRUCTOR:'Destructor';
 SELF : 'Self' ;
 
-instance_method:expr DOT ID LP (list_exp|) RP;
-static_method:ID ACCESS Dollar_id LP (list_exp|) RP;
-member_access:instance_method SEMI| static_method SEMI;
+
 
 //ASSIGNMENT STATEMENT
 
@@ -132,7 +152,7 @@ else_stm: ELSE block_stm ;
 //FOREACH-STATEMENT
 DDOTS:'..';
 
-foreach_stmt: FOREACH LP ID IN INTLIT DDOTS INTLIT (BY INTLIT)? RP block_stm;
+foreach_stmt: FOREACH LP (ID|Dollar_id) IN expr DDOTS expr (BY expr)? RP block_stm;
 
 //Break-statemt
 
@@ -144,14 +164,14 @@ cont_stmt: CONTINUE SEMI;
 
 //Return statement
 
-call_stmt: func_call SEMI;
+// call_stmt: func_call SEMI;
 
 return_stmt: RETURN (expr| ) SEMI;
 
 //TYPE
 typ_var: INT| FLOAT|BOOLEAN|STRING|array|class_type;
 class_type:ID;
-array: ARRAY LSB typ_var COMMA INTLIT RSB;
+array: ARRAY LSB typ_var COMMA intlit RSB;
 
 //Skip
 WS : [ \t\r\n\f]+ -> skip ; 
@@ -183,27 +203,35 @@ LCB: '{';       RCB: '}'; 		ACCESS:'::';
 
 ///////////////////////LITERALS////////////////////////
 //Integer
-INTLIT: (DEC|HEX|OCT|BIN)
+
+
+ZEROINT:ZERODEC|ZEROHEX|ZEROOCT|ZEROBIN;
+fragment ZERODEC: '0';
+fragment ZEROHEX: '0' [xX] '0';
+fragment ZEROOCT: '00';
+fragment ZEROBIN: '0' [bB] '0';
+
+NONZEROINT: (DEC|HEX|OCT|BIN)
     {
         string = str(self.text)
         self.text = string.replace("_","")     
     };
+fragment DEC:[1-9] ([0-9_]* [0-9])?;
 
-fragment DEC:[1-9][0-9_]*|'0';
+fragment HEX:'0' [xX] [1-9A-F] ([0-9A-F_]* [0-9A-F])?;
 
-fragment HEX:'0' [xX] ([0-9A-F])+;
+fragment OCT:'0' [1-7] ([0-7_]* [0-7])?;
 
-fragment OCT:'0' ([0-7])+;
+fragment BIN:'0' [bB] '1' ([01_]* [0-1])?;
 
-fragment BIN:'0' [bB] ([01])+ ;
-
+intlit:ZEROINT|NONZEROINT;
 //BOOLEN
 boolit: TRUE|FALSE;
 
 //FLOATLIT
-fragment IP:DEC;
+fragment IP:DEC|ZERODEC;
 
-fragment DP:DOT (IP|[0-9]*)?;
+fragment DP:DOT (DEC|ZERODEC* DEC*|);
 
 fragment EP:[eE] (ADD|SUB)? IP;
 
@@ -233,7 +261,7 @@ arraylit:iar|mar;
 
 iar:ARRAY LP (aints|afloats|astrings|asbools|) RP;
 
-aints: INTLIT COMMA aints | INTLIT;
+aints: intlit COMMA aints | intlit;
 
 afloats: FLOATLIT COMMA afloats | FLOATLIT;
 
